@@ -1,0 +1,25 @@
+# Branch & folder naming convention for this project (GitFlow-style)
+# See .claude/skills/speckit-branch-convention-*/ for the commands that read this file.
+
+convention:
+  # {type}/{seq}-{kebab}  ->  e.g. feature/001-user-auth
+  branch_pattern: "{type}/{seq}-{kebab}"
+  # spec folders stay flat, without the type prefix
+  folder_pattern: "{seq}-{kebab}"
+
+  type_prefix:
+    feature: "feature"
+    bugfix: "bugfix"
+    hotfix: "hotfix"
+
+  default_type: "feature"
+
+  seq_padding: 3
+  seq_start: 1
+
+  date_format: "YYYYMMDD"
+  ticket_pattern: "[A-Z]+-[0-9]+"
+
+  max_length: 60
+  separator: "-"
+  lowercase: true
