@@ -26,6 +26,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "react-native-getnet-getsmart",
+        {
+          "posDigitalAarPath": "./getnet/libposdigital-2.1.0-release.aar"
+        }
+      ]
+    ]
   }
 }

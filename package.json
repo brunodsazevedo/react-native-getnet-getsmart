@@ -10,17 +10,16 @@
       "types": "./lib/typescript/src/index.d.ts",
       "default": "./lib/module/index.js"
     },
+    "./app.plugin.js": "./app.plugin.js",
     "./package.json": "./package.json"
   },
   "files": [
     "src",
     "lib",
     "android",
-    "ios",
-    "cpp",
-    "*.podspec",
+    "plugin/build",
+    "app.plugin.js",
     "react-native.config.js",
-    "!ios/build",
     "!android/build",
     "!android/gradle",
     "!android/gradlew",
@@ -34,14 +33,14 @@
   "scripts": {
     "example": "yarn workspace react-native-getnet-getsmart-example",
     "clean": "del-cli lib",
-    "prepare": "bob build",
+    "prepare": "bob build && yarn build:plugin",
+    "build:plugin": "tsc -p plugin/tsconfig.json",
     "typecheck": "tsc",
     "test": "jest",
     "lint": "eslint \"**/*.{js,ts,tsx}\""
   },
   "keywords": [
     "react-native",
-    "ios",
     "android"
   ],
   "repository": {
@@ -61,10 +60,12 @@
     "@eslint/compat": "^2.1.0",
     "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^10.0.1",
+    "@expo/config-plugins": "^55.0.10",
     "@jest/globals": "^29.7.0",
     "@react-native/babel-preset": "0.85.0",
     "@react-native/eslint-config": "0.85.0",
     "@react-native/jest-preset": "0.85.0",
+    "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "del-cli": "^7.0.0",
     "eslint": "^9.39.4",
@@ -136,7 +137,7 @@
   },
   "create-react-native-library": {
     "type": "turbo-module",
-    "languages": "kotlin-objc",
+    "languages": "kotlin",
     "tools": [
       "jest",
       "eslint"

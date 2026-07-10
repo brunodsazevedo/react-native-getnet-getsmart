@@ -85,5 +85,16 @@ android/generated
 # React Native Nitro Modules
 nitrogen/
 
+# Getnet PosDigital AAR — fornecido pelo consumidor, nunca commitado (Princípio VIII)
+android/libs/
+example/getnet/*.aar
+!example/getnet/README.md
+
+# Expo config plugin — saída compilada
+plugin/build/
+
+# Cobertura de testes (yarn test --coverage)
+coverage/
+
 # Claude Code project MCP config (caminho local da máquina)
 .mcp.json

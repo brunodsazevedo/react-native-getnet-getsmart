@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "build",
+    "module": "CommonJS",
+    "moduleResolution": "bundler",
+    "customConditions": [],
+    "verbatimModuleSyntax": false,
+    "types": ["node"],
+    "noEmit": false,
+    "declaration": true
+  },
+  "include": ["src"],
+  "exclude": ["src/__tests__"]
+}

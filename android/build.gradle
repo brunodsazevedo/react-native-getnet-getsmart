@@ -46,6 +46,39 @@ android {
   }
 }
 
+// react-native-getnet-getsmart: paridade bare RN (FR-011/Princípio VIII).
+//
+// Apps Expo resolvem o .aar via o config plugin (posDigitalAarPath em app.json,
+// ver plugin/src/withAarResolution.ts) — esse caminho já injeta a dependência no
+// build.gradle do próprio app e nunca passa por GETNET_POSDIGITAL_AAR.
+//
+// Apps bare RN resolvem o .aar aqui, de forma opt-in: se GETNET_POSDIGITAL_AAR
+// estiver definido em gradle.properties, o .aar é resolvido e adicionado
+// automaticamente (zero edição manual de build.gradle). Se a propriedade não
+// estiver definida, esta resolução é simplesmente ignorada — ela nunca falha o
+// build "por padrão", porque este build.gradle é compartilhado por todo tipo de
+// consumidor (inclusive Expo, que nunca define essa propriedade).
+def getnetPosDigitalAarPath = project.findProperty('GETNET_POSDIGITAL_AAR') ?: rootProject.findProperty('GETNET_POSDIGITAL_AAR')
+
+if (getnetPosDigitalAarPath) {
+  def getnetPosDigitalAarFile = file(getnetPosDigitalAarPath)
+
+  if (!getnetPosDigitalAarFile.exists()) {
+    throw new GradleException(
+      "react-native-getnet-getsmart: libposdigital.aar não encontrado em \"${getnetPosDigitalAarPath}\" (GETNET_POSDIGITAL_AAR). " +
+      "Baixe o .aar no Portal do Desenvolvedor Getnet e aponte GETNET_POSDIGITAL_AAR para o arquivo em gradle.properties."
+    )
+  }
+
+  repositories {
+    flatDir { dirs getnetPosDigitalAarFile.parent }
+  }
+}
+
 dependencies {
   implementation "com.facebook.react:react-android"
+
+  if (getnetPosDigitalAarPath) {
+    implementation files(getnetPosDigitalAarPath)
+  }
 }
